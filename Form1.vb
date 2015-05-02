@@ -1,4 +1,6 @@
 ﻿Imports System.IO
+Imports BrawlLib.SSBB.ResourceNodes
+Imports System.Audio
 
 Public Class Form1
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -49,6 +51,31 @@ Public Class Form1
             Exit Sub
         End If
 
+        For Each item As ListViewItem In ListView1.Items
+            Using node As ResourceNode = NodeFactory.FromFile(Nothing, item.Text)
+                If Not TypeOf node Is RSTMNode Then
+                    Continue For
+                End If
 
+                Dim brstm = CType(node, RSTMNode)
+                Dim audioStream = brstm.CreateStreams()
+                WAV.ToFile(audioStream.First(),
+                           txtOutputDir.Text & Path.DirectorySeparatorChar & brstm.Name & " (before).wav",
+                           0,
+                           brstm.LoopStartSample)
+                WAV.ToFile(audioStream.First(),
+                           txtOutputDir.Text & Path.DirectorySeparatorChar & brstm.Name & " (loop).wav",
+                           brstm.LoopStartSample)
+            End Using
+        Next
+    End Sub
+
+    Private Sub btnOpenFolder_Click(sender As Object, e As EventArgs) Handles btnOpenFolder.Click
+        If Not Directory.Exists(txtOutputDir.Text) Then
+            MessageBox.Show("The specified output directory does not exist.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
+
+        Process.Start(txtOutputDir.Text)
     End Sub
 End Class

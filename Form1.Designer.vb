@@ -31,6 +31,7 @@ Partial Class Form1
         Me.btnBrowse = New System.Windows.Forms.Button()
         Me.btnStart = New System.Windows.Forms.Button()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
+        Me.btnOpenFolder = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'ListView1
@@ -110,11 +111,21 @@ Partial Class Form1
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         Me.OpenFileDialog1.Multiselect = True
         '
+        'btnOpenFolder
+        '
+        Me.btnOpenFolder.Location = New System.Drawing.Point(12, 226)
+        Me.btnOpenFolder.Name = "btnOpenFolder"
+        Me.btnOpenFolder.Size = New System.Drawing.Size(75, 23)
+        Me.btnOpenFolder.TabIndex = 7
+        Me.btnOpenFolder.Text = "Open folder"
+        Me.btnOpenFolder.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(384, 261)
+        Me.Controls.Add(Me.btnOpenFolder)
         Me.Controls.Add(Me.btnStart)
         Me.Controls.Add(Me.btnBrowse)
         Me.Controls.Add(Me.txtOutputDir)
@@ -137,5 +148,6 @@ Partial Class Form1
     Friend WithEvents btnBrowse As System.Windows.Forms.Button
     Friend WithEvents btnStart As System.Windows.Forms.Button
     Friend WithEvents OpenFileDialog1 As System.Windows.Forms.OpenFileDialog
+    Friend WithEvents btnOpenFolder As System.Windows.Forms.Button
 
 End Class
