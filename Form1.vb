@@ -88,6 +88,8 @@ Public Class Form1
     End Sub
 
     Private Sub btnAbout_Click(sender As Object, e As EventArgs) Handles btnAbout.Click
-        MessageBox.Show("BRSTM to WAV Converter" + Environment.NewLine + "© 2015 libertyernie" + Environment.NewLine + "https://github.com/libertyernie/BrstmToWav")
+        Dim N = Environment.NewLine
+        MessageBox.Show("BRSTM to WAV Converter" & N & "© 2015 libertyernie" & N & N & "https://github.com/libertyernie/BrstmToWav" & N & N &
+                        "This program is provided as-is without any warranty, implied or otherwise. By using this program, the end user agrees to take full responsibility regarding its proper and lawful use. The authors/hosts/distributors cannot be held responsible for any damage resulting in the use of this program, nor can they be held accountable for the manner in which it is used.")
     End Sub
 End Class
