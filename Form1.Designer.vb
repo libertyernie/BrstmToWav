@@ -32,6 +32,10 @@ Partial Class Form1
         Me.btnStart = New System.Windows.Forms.Button()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.btnOpenFolder = New System.Windows.Forms.Button()
+        Me.chk0ToStart = New System.Windows.Forms.CheckBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.chkStartToEnd = New System.Windows.Forms.CheckBox()
+        Me.chk0ToEnd = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
         '
         'ListView1
@@ -42,7 +46,7 @@ Partial Class Form1
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.ListView1.Location = New System.Drawing.Point(12, 12)
         Me.ListView1.Name = "ListView1"
-        Me.ListView1.Size = New System.Drawing.Size(279, 182)
+        Me.ListView1.Size = New System.Drawing.Size(279, 187)
         Me.ListView1.TabIndex = 0
         Me.ListView1.UseCompatibleStateImageBehavior = False
         Me.ListView1.View = System.Windows.Forms.View.List
@@ -70,10 +74,11 @@ Partial Class Form1
         'Label1
         '
         Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.Label1.Location = New System.Drawing.Point(12, 200)
+        Me.Label1.Location = New System.Drawing.Point(12, 300)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(3)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(85, 20)
-        Me.Label1.TabIndex = 3
+        Me.Label1.TabIndex = 7
         Me.Label1.Text = "Output directory:"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
@@ -81,28 +86,28 @@ Partial Class Form1
         '
         Me.txtOutputDir.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtOutputDir.Location = New System.Drawing.Point(103, 200)
+        Me.txtOutputDir.Location = New System.Drawing.Point(103, 300)
         Me.txtOutputDir.Name = "txtOutputDir"
         Me.txtOutputDir.Size = New System.Drawing.Size(213, 20)
-        Me.txtOutputDir.TabIndex = 4
+        Me.txtOutputDir.TabIndex = 8
         '
         'btnBrowse
         '
         Me.btnBrowse.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnBrowse.Location = New System.Drawing.Point(322, 200)
+        Me.btnBrowse.Location = New System.Drawing.Point(322, 300)
         Me.btnBrowse.Name = "btnBrowse"
         Me.btnBrowse.Size = New System.Drawing.Size(50, 20)
-        Me.btnBrowse.TabIndex = 5
+        Me.btnBrowse.TabIndex = 9
         Me.btnBrowse.Text = "&Browse"
         Me.btnBrowse.UseVisualStyleBackColor = True
         '
         'btnStart
         '
         Me.btnStart.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnStart.Location = New System.Drawing.Point(297, 226)
+        Me.btnStart.Location = New System.Drawing.Point(297, 326)
         Me.btnStart.Name = "btnStart"
         Me.btnStart.Size = New System.Drawing.Size(75, 23)
-        Me.btnStart.TabIndex = 6
+        Me.btnStart.TabIndex = 11
         Me.btnStart.Text = "Start"
         Me.btnStart.UseVisualStyleBackColor = True
         '
@@ -113,18 +118,71 @@ Partial Class Form1
         '
         'btnOpenFolder
         '
-        Me.btnOpenFolder.Location = New System.Drawing.Point(12, 226)
+        Me.btnOpenFolder.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.btnOpenFolder.Location = New System.Drawing.Point(12, 326)
         Me.btnOpenFolder.Name = "btnOpenFolder"
         Me.btnOpenFolder.Size = New System.Drawing.Size(75, 23)
-        Me.btnOpenFolder.TabIndex = 7
+        Me.btnOpenFolder.TabIndex = 10
         Me.btnOpenFolder.Text = "Open folder"
         Me.btnOpenFolder.UseVisualStyleBackColor = True
+        '
+        'chk0ToStart
+        '
+        Me.chk0ToStart.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.chk0ToStart.AutoSize = True
+        Me.chk0ToStart.Location = New System.Drawing.Point(15, 231)
+        Me.chk0ToStart.Name = "chk0ToStart"
+        Me.chk0ToStart.Size = New System.Drawing.Size(132, 17)
+        Me.chk0ToStart.TabIndex = 4
+        Me.chk0ToStart.Text = "Song start to loop start"
+        Me.chk0ToStart.UseVisualStyleBackColor = True
+        '
+        'Label2
+        '
+        Me.Label2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.Label2.Location = New System.Drawing.Point(12, 205)
+        Me.Label2.Margin = New System.Windows.Forms.Padding(3)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(85, 20)
+        Me.Label2.TabIndex = 3
+        Me.Label2.Text = "Files to export:"
+        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'chkStartToEnd
+        '
+        Me.chkStartToEnd.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.chkStartToEnd.AutoSize = True
+        Me.chkStartToEnd.Checked = True
+        Me.chkStartToEnd.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkStartToEnd.Location = New System.Drawing.Point(15, 254)
+        Me.chkStartToEnd.Name = "chkStartToEnd"
+        Me.chkStartToEnd.Size = New System.Drawing.Size(106, 17)
+        Me.chkStartToEnd.TabIndex = 5
+        Me.chkStartToEnd.Text = "Loop start to end"
+        Me.chkStartToEnd.UseVisualStyleBackColor = True
+        '
+        'chk0ToEnd
+        '
+        Me.chk0ToEnd.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.chk0ToEnd.AutoSize = True
+        Me.chk0ToEnd.Checked = True
+        Me.chk0ToEnd.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chk0ToEnd.Location = New System.Drawing.Point(15, 277)
+        Me.chk0ToEnd.Name = "chk0ToEnd"
+        Me.chk0ToEnd.Size = New System.Drawing.Size(168, 17)
+        Me.chk0ToEnd.TabIndex = 6
+        Me.chk0ToEnd.Text = "Song start to end (entire song)"
+        Me.chk0ToEnd.UseVisualStyleBackColor = True
         '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(384, 261)
+        Me.ClientSize = New System.Drawing.Size(384, 361)
+        Me.Controls.Add(Me.chk0ToEnd)
+        Me.Controls.Add(Me.chkStartToEnd)
+        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.chk0ToStart)
         Me.Controls.Add(Me.btnOpenFolder)
         Me.Controls.Add(Me.btnStart)
         Me.Controls.Add(Me.btnBrowse)
@@ -149,5 +207,9 @@ Partial Class Form1
     Friend WithEvents btnStart As System.Windows.Forms.Button
     Friend WithEvents OpenFileDialog1 As System.Windows.Forms.OpenFileDialog
     Friend WithEvents btnOpenFolder As System.Windows.Forms.Button
+    Friend WithEvents chk0ToStart As System.Windows.Forms.CheckBox
+    Friend WithEvents Label2 As System.Windows.Forms.Label
+    Friend WithEvents chkStartToEnd As System.Windows.Forms.CheckBox
+    Friend WithEvents chk0ToEnd As System.Windows.Forms.CheckBox
 
 End Class

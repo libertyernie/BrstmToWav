@@ -58,14 +58,22 @@ Public Class Form1
                 End If
 
                 Dim brstm = CType(node, RSTMNode)
-                Dim audioStream = brstm.CreateStreams()
-                WAV.ToFile(audioStream.First(),
-                           txtOutputDir.Text & Path.DirectorySeparatorChar & brstm.Name & " (before).wav",
-                           0,
-                           brstm.LoopStartSample)
-                WAV.ToFile(audioStream.First(),
-                           txtOutputDir.Text & Path.DirectorySeparatorChar & brstm.Name & " (loop).wav",
-                           brstm.LoopStartSample)
+                Dim audioStream = brstm.CreateStreams().First()
+                If chk0ToStart.Checked Then
+                    WAV.ToFile(audioStream,
+                               txtOutputDir.Text & Path.DirectorySeparatorChar & brstm.Name & " (beginning).wav",
+                               0,
+                               brstm.LoopStartSample)
+                End If
+                If chkStartToEnd.Checked Then
+                    WAV.ToFile(audioStream,
+                               txtOutputDir.Text & Path.DirectorySeparatorChar & brstm.Name & " (loop).wav",
+                               brstm.LoopStartSample)
+                End If
+                If chk0ToEnd.Checked Then
+                    WAV.ToFile(audioStream,
+                               txtOutputDir.Text & Path.DirectorySeparatorChar & brstm.Name & ".wav")
+                End If
             End Using
         Next
     End Sub
