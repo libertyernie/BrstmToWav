@@ -86,4 +86,8 @@ Public Class Form1
 
         Process.Start(txtOutputDir.Text)
     End Sub
+
+    Private Sub btnAbout_Click(sender As Object, e As EventArgs) Handles btnAbout.Click
+        MessageBox.Show("BRSTM to WAV Converter" + Environment.NewLine + "© 2015 libertyernie" + Environment.NewLine + "https://github.com/libertyernie/BrstmToWav")
+    End Sub
 End Class
