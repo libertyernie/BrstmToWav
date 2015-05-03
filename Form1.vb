@@ -51,31 +51,60 @@ Public Class Form1
             Exit Sub
         End If
 
-        For Each item As ListViewItem In ListView1.Items
-            Using node As ResourceNode = NodeFactory.FromFile(Nothing, item.Text)
-                If Not TypeOf node Is RSTMNode Then
-                    Continue For
+        Dim wavsPerBrstm As Integer
+        If chk0ToStart.Checked Then
+            wavsPerBrstm += 1
+        End If
+        If chkStartToEnd.Checked Then
+            wavsPerBrstm += 1
+        End If
+        If chk0ToEnd.Checked Then
+            wavsPerBrstm += 1
+        End If
+
+        Using pw As New ProgressWindow(Me, "Progress", "Caption", True)
+            pw.Begin(0, wavsPerBrstm * ListView1.Items.Count, 0)
+
+            For Each item As ListViewItem In ListView1.Items
+                If pw.Cancelled Then
+                    pw.Finish()
+                    Exit For
                 End If
 
-                Dim brstm = CType(node, RSTMNode)
-                Dim audioStream = brstm.CreateStreams().First()
-                If chk0ToStart.Checked Then
-                    WAV.ToFile(audioStream,
-                               txtOutputDir.Text & Path.DirectorySeparatorChar & brstm.Name & " (beginning).wav",
-                               0,
-                               brstm.LoopStartSample)
-                End If
-                If chkStartToEnd.Checked Then
-                    WAV.ToFile(audioStream,
-                               txtOutputDir.Text & Path.DirectorySeparatorChar & brstm.Name & " (loop).wav",
-                               brstm.LoopStartSample)
-                End If
-                If chk0ToEnd.Checked Then
-                    WAV.ToFile(audioStream,
-                               txtOutputDir.Text & Path.DirectorySeparatorChar & brstm.Name & ".wav")
-                End If
-            End Using
-        Next
+                Using node As ResourceNode = NodeFactory.FromFile(Nothing, item.Text)
+                    If Not TypeOf node Is RSTMNode Then
+                        Continue For
+                    End If
+
+                    Dim brstm = CType(node, RSTMNode)
+                    Dim audioStream = brstm.CreateStreams().First()
+                    If chk0ToStart.Checked Then
+                        Dim filename = txtOutputDir.Text & Path.DirectorySeparatorChar & brstm.Name & " (beginning).wav"
+                        pw.Caption = Path.GetFileName(filename)
+                        WAV.ToFile(audioStream,
+                                   filename,
+                                   0,
+                                   brstm.LoopStartSample)
+                        pw.Update(pw.CurrentValue + 1)
+                    End If
+                    If chkStartToEnd.Checked Then
+                        Dim filename = txtOutputDir.Text & Path.DirectorySeparatorChar & brstm.Name & " (loop).wav"
+                        pw.Caption = Path.GetFileName(filename)
+                        WAV.ToFile(audioStream,
+                                   filename,
+                                   brstm.LoopStartSample)
+                        pw.Update(pw.CurrentValue + 1)
+                    End If
+                    If chk0ToEnd.Checked Then
+                        Dim filename = txtOutputDir.Text & Path.DirectorySeparatorChar & brstm.Name & ".wav"
+                        pw.Caption = Path.GetFileName(filename)
+                        WAV.ToFile(audioStream,
+                                   filename)
+                        pw.Update(pw.CurrentValue + 1)
+                    End If
+                End Using
+            Next
+        End Using
     End Sub
 
     Private Sub btnOpenFolder_Click(sender As Object, e As EventArgs) Handles btnOpenFolder.Click
